@@ -164,7 +164,6 @@ public class AppointmentResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of appointments in body.
      */
     @GetMapping("/appointments")
-    @PreAuthorize("hasAuthority('ROLE_ADVISER')" + "|| hasAuthority('ROLE_MANAGER')")
     public ResponseEntity<List<Appointment>> getAllAppointments(Pageable pageable) {
         log.debug("REST request to get a page of Appointments");
         Page<Appointment> page = appointmentRepository.findAll(pageable);
