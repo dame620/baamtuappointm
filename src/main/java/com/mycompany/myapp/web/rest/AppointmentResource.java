@@ -113,6 +113,7 @@ public class AppointmentResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/appointments/{id}", consumes = "application/merge-patch+json")
+    @PreAuthorize("hasAuthority('ROLE_ADVISER')" + "|| hasAuthority('ROLE_MANAGER')")
     public ResponseEntity<Appointment> partialUpdateAppointment(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody Appointment appointment
@@ -164,6 +165,7 @@ public class AppointmentResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of appointments in body.
      */
     @GetMapping("/appointments")
+    @PreAuthorize("hasAuthority('ROLE_ADVISER')" + "|| hasAuthority('ROLE_MANAGER')")
     public ResponseEntity<List<Appointment>> getAllAppointments(Pageable pageable) {
         log.debug("REST request to get a page of Appointments");
         Page<Appointment> page = appointmentRepository.findAll(pageable);
